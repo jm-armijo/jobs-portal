@@ -10,6 +10,14 @@ This projects has been implemented in [Node.js](https://nodejs.org/), [Typescrip
 
 ## Setup
 
+### Database
+
+Create the image and run the db container:
+```
+docker build . -t mongodb
+docker run --name portal-db -p 27017:27017 -d mongodb
+```
+
 TBD
 
 ## License
