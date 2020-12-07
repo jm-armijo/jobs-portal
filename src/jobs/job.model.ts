@@ -1,18 +1,14 @@
-export class Job {
-	private id: string;
-	private title: string;
-	private description: string;
-	private expiredAt: string;
+import * as mongoose from 'mongoose';
 
-	constructor(
-		id: string,
-		title: string,
-		description: string,
-		expiredAt: string
-	) {
-		this.id          = id;
-		this.title       = title;
-		this.description = description;
-		this.expiredAt   = expiredAt;
-	};
+export const JobSchema = new mongoose.Schema({
+    title: {type: String, required: true},
+    description: {type: String, required: true},
+    expiredAt: {type: String, required: true},
+});
+
+export interface Job extends mongoose.Document {
+    id: string;
+    title: string;
+    description: string;
+    expiredAt: string;
 }
