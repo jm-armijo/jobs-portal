@@ -1,4 +1,4 @@
-var document = [
+var documents = [
     {
         "_id" : ObjectId("5e5df7f450571fb3aecdcf21"),
         "companyId" : ObjectId("5e5df7fc6953acd3dc50fe8f"),
@@ -8,7 +8,7 @@ var document = [
         "role" : "user",
     },
     {
-        "_id" : ObjectId("5e5df7f450571fb3aecdcf21"),
+        "_id" : ObjectId("5e5df7f450571fb3aecdcf22"),
         "companyId" : ObjectId("5e5df7fc6953acd3dc50fe8f"),
         "name": "Mark Smith",
         "username": "mark",
@@ -18,4 +18,4 @@ var document = [
 ];
 
 db = db.getSiblingDB('core');
-db.users.insert(document);
+db.users.insertMany(documents);
