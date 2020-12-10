@@ -18,7 +18,15 @@ docker build . -t mongodb
 docker run --name portal-db -p 27017:27017 -d mongodb
 ```
 
-TBD
+## Usage
+
+### Login
+
+```
+curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password": "password123"}' -H "Content-Type: application/json"
+```
+
+TODO : Add other requests to document
 
 ## License
 
