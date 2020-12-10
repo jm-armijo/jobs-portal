@@ -1,20 +1,21 @@
-import {
-    Controller,
-    Post,
-    Body,
-} from '@nestjs/common';
+import { Controller, Post, Request, Body, UseGuards} from '@nestjs/common';
 import { JobsService } from './jobs.service';
+import { JwtAdminGuard } from '../auth/guards/jwt.admin.guard';
 
 @Controller('jobs')
 export class JobsController {
     constructor(private readonly jobsService: JobsService) {}
 
-    @Post()
+    @UseGuards(JwtAdminGuard)
+    @Post('create')
     async addJob(
+        @Request() request: any,
         @Body('title') title: string,
         @Body('description') description: string,
         @Body('expiredAt') expiredAt: string,
     ) {
+        const user = request.user
+
         let response: any = {};
         try {
             const id = await this.jobsService.insertJob(title, description, expiredAt);

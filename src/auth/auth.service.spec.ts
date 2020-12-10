@@ -39,37 +39,41 @@ describe('AuthService', () => {
 
     describe('validateUser', () => {
         it('should return a user object without the password', async () => {
-            let expectedUser: any = {};
-            expectedUser.id       = "98765";
-            expectedUser.name     = "Test User";
-            expectedUser.username = "test";
-            expectedUser.role     = "any";
-            const expectedResult = expectedUser;
+            let mockedUser = new class {
+                id       = "98765";
+                name     = "Test User";
+                username = "test";
+                password = "pwd";
+                role     = "any";
 
-            let mockedUser: any = {};
-            mockedUser.id       = "98765";
-            mockedUser.name     = "Test User";
-            mockedUser.username = "test";
-            mockedUser.password = "pwd";
-            mockedUser.role     = "any";
+                toJSON() {return this; }
+            };
             jest.spyOn(mockUsersService, 'getUser').mockResolvedValue(mockedUser);
-            const actualResult = await authService.validateUser('test', 'pwd');
 
+            let expectedUser = new class {
+                id       = "98765";
+                name     = "Test User";
+                username = "test";
+                role     = "any";
+            };
+
+            const actualResult = await authService.validateUser('test', 'pwd');
+            const expectedResult = expectedUser;
             expect(actualResult).toEqual(expectedResult);
         });
 
         it('should return null if passwords do not match', async () => {
-            const expectedResult = null
-
-            let mockedUser: any = {};
-            mockedUser.id       = "98765";
-            mockedUser.name     = "Test User";
-            mockedUser.username = "test";
-            mockedUser.password = "pwd";
-            mockedUser.role     = "any";
+            let mockedUser = new class {
+                id       = "98765";
+                name     = "Test User";
+                username = "test";
+                password = "pwd";
+                role     = "any";
+            };
             jest.spyOn(mockUsersService, 'getUser').mockResolvedValue(mockedUser);
-            const actualResult = await authService.validateUser('test', 'wrong password');
 
+            const actualResult = await authService.validateUser('test', 'wrong password');
+            const expectedResult = null
             expect(actualResult).toEqual(expectedResult);
         });
 
@@ -86,14 +90,15 @@ describe('AuthService', () => {
 
     describe('login', () => {
         it('should return a user object without the password', async () => {
-            let mockedUser: any = {};
-            mockedUser.id       = "98765";
-            mockedUser.name     = "Test User";
-            mockedUser.username = "test";
-            mockedUser.password = "pwd";
-            mockedUser.role     = "any";
+            let mockedUser = new class {
+                id       = "98765";
+                name     = "Test User";
+                username = "test";
+                password = "pwd";
+                role     = "any";
+            };
 
-            let hash = JSON.stringify({username: mockedUser.username, sub: mockedUser.password});
+            let hash = JSON.stringify({username: mockedUser.username, sub: mockedUser.password, role: mockedUser.role});
             jest.spyOn(mockJwtService, 'sign').mockResolvedValue(hash);
 
             const actualResponse = await authService.login(mockedUser);

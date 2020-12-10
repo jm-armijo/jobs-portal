@@ -26,6 +26,12 @@ docker run --name portal-db -p 27017:27017 -d mongodb
 curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password": "password123"}' -H "Content-Type: application/json"
 ```
 
+### Create job vacancy
+
+```
+curl -X POST http://localhost:3000/jobs/create -d '{"title": "test title", "description": "test description", "expiredAt": "2030-01-01 13:14:15"}' -H "Content-Type: application/json" -H "Authorization: Bearer <JWT>"
+```
+
 TODO : Add other requests to document
 
 ## License
