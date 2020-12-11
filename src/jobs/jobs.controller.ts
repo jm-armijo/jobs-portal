@@ -15,10 +15,11 @@ export class JobsController {
         @Body('expiredAt') expiredAt: string,
     ) {
         const user = request.user
+        const companyId = user.companyId;
 
         let response: any = {};
         try {
-            const id = await this.jobsService.insertJob(title, description, expiredAt);
+            const id = await this.jobsService.insertJob(title, description, expiredAt, companyId);
             response = {id: id};
         } catch(e) {
             // TODO : We should log the full error (including backtrace) to a log file.

@@ -44,7 +44,7 @@ describe('JobsService', () => {
 
             jest.spyOn(jobModel.prototype, 'save').mockResolvedValue(mockedResponse);
 
-            const actualResult = await jobsService.insertJob('Test title', 'Test description', '2021-01-31 23:59:59');
+            const actualResult = await jobsService.insertJob('Test title', 'Test description', '2021-01-31 23:59:59', '123456789');
             const expectedResult = jobId;
             expect(actualResult).toEqual(expectedResult);
         });
@@ -56,7 +56,7 @@ describe('JobsService', () => {
 
             jest.spyOn(jobModel.prototype, 'save').mockResolvedValue(mockedResponse);
 
-            const actualResult = await jobsService.insertJob('', '', '');
+            const actualResult = await jobsService.insertJob('', '', '', '');
             const expectedResult = jobId;
             expect(actualResult).toEqual(expectedResult);
         });
@@ -68,7 +68,7 @@ describe('JobsService', () => {
 
             jest.spyOn(jobModel.prototype, 'save').mockResolvedValue(mockedResponse);
 
-            const actualResult = await jobsService.insertJob('Test title', 'Test description', '2021-01-31 23:59:59');
+            const actualResult = await jobsService.insertJob('Test title', 'Test description', '2021-01-31 23:59:59', '123456789');
             const expectedResult = jobId;
             expect(actualResult).toEqual(expectedResult);
         });
@@ -80,7 +80,7 @@ describe('JobsService', () => {
 
             jest.spyOn(jobModel.prototype, 'save').mockImplementation(() => { throw new Error("Fake error"); });
 
-            const actualResult = await jobsService.insertJob('Test title', 'Test description', '2021-01-31 23:59:59');
+            const actualResult = await jobsService.insertJob('Test title', 'Test description', '2021-01-31 23:59:59', '123456789');
             const expectedResult = jobId;
             expect(actualResult).toEqual(expectedResult);
         });
