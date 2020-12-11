@@ -11,7 +11,7 @@ export class JobsService {
     async insertJob(
         title: string,
         description: string,
-        expiredAt: string,
+        expiredAt: Date,
         companyId: string,
     ) {
         const job = new this.jobModel({

@@ -12,7 +12,7 @@ export class JobsController {
         @Request() request: any,
         @Body('title') title: string,
         @Body('description') description: string,
-        @Body('expiredAt') expiredAt: string,
+        @Body('expiredAt') expiredAt: Date,
     ) {
         const user = request.user
         const companyId = user.companyId;
