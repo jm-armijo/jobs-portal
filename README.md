@@ -18,7 +18,17 @@ docker build . -t mongodb
 docker run --name portal-db -p 27017:27017 -d mongodb
 ```
 
+### Services
+
+Bring up the service (sorry, no microservices yet) by doing:
+
+```
+npm run start
+```
+
 ## Usage
+
+Only these two requests have been implemented:
 
 ### Login
 
@@ -32,7 +42,14 @@ curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password
 curl -X POST http://localhost:3000/jobs/create -d '{"title": "test title", "description": "test description", "expiredAt": "2030-01-01 13:14:15"}' -H "Content-Type: application/json" -H "Authorization: Bearer <JWT>"
 ```
 
-TODO : Add other requests to document
+
+## Testing
+
+Execute this command to run all tests:
+
+```
+npm run test
+```
 
 ## License
 
